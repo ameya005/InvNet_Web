@@ -7,7 +7,7 @@ from models import wgan
 from torch.utils.data import Dataset
 
 BATCH_SIZE = 1
-DIM = 128
+DIM = 64
 CHANNEL = 3
 
 def generate_image(x1, y1, r1, x2, y2, r2):
