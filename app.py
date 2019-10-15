@@ -24,11 +24,12 @@ def hello_world():
         #print(x1,y1,r1,x2,y2,r2)
         #print(type(x1))
         img = generate_image(x1,y1,r1,x2,y2,r2)[0,...]
-        plt.imshow(img, cmap='jet')
-        plt.show()
-        f = NamedTemporaryFile(suffix='.png')
-        name = f.name
-        plt.imsave(f, img, cmap='jet')
+        #plt.imshow(img, cmap='jet')
+        #plt.show()
+        #f = NamedTemporaryFile(suffix='.png')
+        #name = f.name
+        name = './static/genimg.png'
+        plt.imsave(name, img, cmap='jet')
         return render_template('output.html', imgpath=name)
 
 if __name__ == '__main__':

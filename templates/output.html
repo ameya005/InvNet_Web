@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href='/static/style.css' />
     <title>InvNet Simulator</title>
 </head>
 <body>
     <h2>Input for generating the circle.</h2>
-    <form method="post" enctype="multipart/form-data">
-        <h5>circle1 x-coordinate</h5>
-        <input type="number" name="x1" step="0.01">
-        <h5>circle1 y-coordinate</h5>
-        <input type="number" name="y1" step="0.01">
-        <h5>circle1 radius</h5>
-        <input type="number" name="r1" step="0.01">
-        <h5>circle2 x-coordinate</h5>
-        <input type="number" name="x2" step="0.01">
-        <h5>circle2 y-coordinate</h5>
-        <input type="number" name="y2" step="0.01">
-        <h5>circle2 radius</h5>
-        <input type="number" name="r2" step="0.01">
-        <input type="submit" value="upload">
-    </form>
-    <img src="{{ imgpath }}" alt="Gen image">
+    <div class="grid-container">
+    <div class="gridform1">
+        <form method="post" enctype="multipart/form-data">
+            <h5>circle1 x-coordinate</h5>
+            <input type="number" name="x1" step="0.01">
+            <h5>circle1 y-coordinate</h5>
+            <input type="number" name="y1" step="0.01">
+            <h5>circle1 radius</h5>
+            <input type="number" name="r1" step="0.01">
+            <h5>circle2 x-coordinate</h5>
+            <input type="number" name="x2" step="0.01">
+            <h5>circle2 y-coordinate</h5>
+            <input type="number" name="y2" step="0.01">
+            <h5>circle2 radius</h5>
+            <input type="number" name="r2" step="0.01">
+            <input type="submit" value="upload">
+        </form>
+    </div><div class="grid-item">
+        <img src="{{ imgpath }}" alt="Gen image" style="float:right;width:400px;height:400px;border:0">
+    </div>
+    <div class="gid-
+    </div>
 </body>
 </html>

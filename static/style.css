@@ -1,0 +1,19 @@
+body{
+    background: #a0a0a0;
+    color: #101010;
+}
+
+.grid-container{
+    display: grid;
+    text-align: center;
+}
+
+.gridform1{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    clear: right
+}
+
+
+
+
