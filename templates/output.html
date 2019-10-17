@@ -5,28 +5,34 @@
     <title>InvNet Simulator</title>
 </head>
 <body>
+    {% extends "template.html" %}
+    {% block content %}
+
     <h2>Input for generating the circle.</h2>
+    <h3>The unit of input value is pixel. (Integer)</h3>
     <div class="grid-container">
     <div class="gridform1">
         <form method="post" enctype="multipart/form-data">
-            <h5>circle1 x-coordinate</h5>
+            <h5>circle1 x-coordinate (Any value from 36 to 96)</h5>
             <input type="number" name="x1" step="0.01">
-            <h5>circle1 y-coordinate</h5>
+            <h5>circle1 y-coordinate (Any value from 36 to 96)</h5>
             <input type="number" name="y1" step="0.01">
-            <h5>circle1 radius</h5>
+            <h5>circle1 radius (Any value from 12 to 34)</h5>
             <input type="number" name="r1" step="0.01">
-            <h5>circle2 x-coordinate</h5>
+            <h5>circle2 x-coordinate (Any value from 36 to 96)</h5>
             <input type="number" name="x2" step="0.01">
-            <h5>circle2 y-coordinate</h5>
+            <h5>circle2 y-coordinate (Any value from 36 to 96)</h5>
             <input type="number" name="y2" step="0.01">
-            <h5>circle2 radius</h5>
+            <h5>circle2 radius (Any value from 12 to 34)</h5>
             <input type="number" name="r2" step="0.01">
             <input type="submit" value="upload">
         </form>
     </div><div class="grid-item">
         <img src="{{ imgpath }}" alt="Gen image" style="float:right;width:400px;height:400px;border:0">
     </div>
-    <div class="gid-
+    <div class="grid-item">
     </div>
+    </div>
+    {% endblock %}
 </body>
 </html>
