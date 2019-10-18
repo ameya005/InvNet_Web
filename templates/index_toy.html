@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href='/static/style.css' />
+    <title>InvNet Simulator</title>
+</head>
+<body>
+    {% extends "template.html" %}
+    {% block content %}
+    <h2>Input for generating the circle.</h2>
+        <h3>The unit of input value is pixel. (Integer)</h3>
+        <h5>Example Configuration: 36, 36, 12, 90, 90, 30.
+        This will create one circle on left top with radius 12 and a circle on right bottom with radius 30.</h5>
+    <form method="post" enctype="multipart/form-data">
+        <h5>circle1 x-coordinate (Any value from 36 to 96)</h5>
+        <input type="number" name="x1" step="0.01">
+        <h5>circle1 y-coordinate (Any value from 36 to 96)</h5>
+        <input type="number" name="y1" step="0.01">
+        <h5>circle1 radius (Any value from 12 to 34)</h5>
+        <input type="number" name="r1" step="0.01">
+        <h5>circle2 x-coordinate (Any value from 36 to 96)</h5>
+        <input type="number" name="x2" step="0.01">
+        <h5>circle2 y-coordinate (Any value from 36 to 96)</h5>
+        <input type="number" name="y2" step="0.01">
+        <h5>circle2 radius (Any value from 12 to 34)</h5>
+        <input type="number" name="r2" step="0.01">
+        <input type="submit" value="upload">
+    </form>
+    {% endblock %}
+</body>
+</html>

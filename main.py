@@ -20,10 +20,12 @@ import time
 import uuid
 from PIL import Image
 from flask import Flask, request, render_template
-from inference import generate_image
+import inference
+import inference_toy
 from tempfile import NamedTemporaryFile
 from matplotlib import pyplot as plt
-from google.cloud import storage
+# from google.cloud import storage
+from vol_frac import cal_vol_fraction
 
 app = Flask(__name__, template_folder="templates")
 app.config['SEND_FILE_MAS_AGE_DEFAULT'] = 300
@@ -32,22 +34,73 @@ from common import get_model, gen_rand_noise
 # Configure this environment variable via app.yaml
 # CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
 
-def download_blob(bucket_name, source_blob_name, destination_file_name):
-    """Downloads a blob from the bucket."""
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_name)
-    blob = bucket.blob(source_blob_name)
+# def download_blob(bucket_name, source_blob_name, destination_file_name):
+#     """Downloads a blob from the bucket."""
+#     storage_client = storage.Client()
+#     bucket = storage_client.get_bucket(bucket_name)
+#     blob = bucket.blob(source_blob_name)
+#
+#     blob.download_to_filename(destination_file_name)
+#
+#     print('Blob {} downloaded to {}.'.format(
+#         source_blob_name,
+#         destination_file_name))
 
-    blob.download_to_filename(destination_file_name)
 
-    print('Blob {} downloaded to {}.'.format(
-        source_blob_name,
-        destination_file_name))
 
-@app.route('/', methods=['GET', 'POST'])
+# @app.route('/', methods=['GET', 'POST'])
+# def home():
+#     if request.method == 'GET':
+#         return render_template('index.html', value='hi')
+#     if request.method == 'POST':
+#         # print("HELLLOODFKOSDKFOSDKFOSKDOF")
+#
+#         x1 = float(request.form.get('x1', None))
+#         y1 = float(request.form.get('y1', None))
+#         r1 = float(request.form.get('r1', None))
+#         x2 = float(request.form.get('x2', None))
+#         y2 = float(request.form.get('y2', None))
+#         r2 = float(request.form.get('r2', None))
+#
+#         img = generate_image(x1/128, x2/128, y1/128, y2/128, 3.1415*r1*r1/128/128, 3.1415*r2*r2/128/128)
+#
+#         savebuffer = uuid.uuid4()
+#         name = './static/' + str(savebuffer) + '.png'
+#         plt.imsave(name, img, cmap='nipy_spectral')
+#
+#         return render_template('output.html', imgpath=name)
+
+
+@app.route('/')
 def home():
+    return render_template('home.html')
+
+# @app.route('/', methods=['GET', 'POST'])
+# def home():
+#     if request.method == 'GET':
+#         return render_template('index.html', value='hi')
+#     if request.method == 'POST':
+#         # print("HELLLOODFKOSDKFOSDKFOSKDOF")
+#
+#         x1 = float(request.form.get('x1', None))
+#         y1 = float(request.form.get('y1', None))
+#         r1 = float(request.form.get('r1', None))
+#         x2 = float(request.form.get('x2', None))
+#         y2 = float(request.form.get('y2', None))
+#         r2 = float(request.form.get('r2', None))
+#
+#         img = generate_image(x1, y1, r1, x2, y2, 0)
+#
+#         savebuffer = uuid.uuid4()
+#         name = './static/' + str(savebuffer) + '.png'
+#         plt.imsave(name, img, cmap='nipy_spectral')
+#
+#         return render_template('output.html', imgpath=name)
+
+@app.route("/toyexample", methods=['GET', 'POST'])
+def toyexample():
     if request.method == 'GET':
-        return render_template('index.html', value='hi')
+        return render_template('index_toy.html', value='hi')
     if request.method == 'POST':
         # print("HELLLOODFKOSDKFOSDKFOSKDOF")
 
@@ -58,23 +111,66 @@ def home():
         y2 = float(request.form.get('y2', None))
         r2 = float(request.form.get('r2', None))
 
-        #print(type(x1))
-        # img = generate_image(x1,y1,r1,x2,y2,r2)[0,...]
-        img = generate_image(x1/128, x2/128, y1/128, y2/128, 3.1415*r1*r1/128/128, 3.1415*r2*r2/128/128)
+        img = inference_toy.generate_image(x1 / 128, x2 / 128, y1 / 128, y2 / 128, 3.1415 * r1 * r1 / 128 / 128,
+                             3.1415 * r2 * r2 / 128 / 128)
 
-        #plt.imshow(img, cmap='jet')
-        #plt.show()
-        #f = NamedTemporaryFile(suffix='.png')
-        #name = f.name
+        fig = plt.figure(figsize=(12, 12))
+        columns = 4
+        rows = 4
+
+        for i in range(1, columns*rows+1):
+            image = img[i-1].squeeze(0).cpu().numpy()
+            fig.add_subplot(rows, columns, i)
+            plt.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9,
+                                wspace=0.05, hspace=0.05)
+            plt.imshow(image, cmap='binary')
+            plt.axis('off')
+
+
         savebuffer = uuid.uuid4()
         name = './static/' + str(savebuffer) + '.png'
-        plt.imsave(name, img, cmap='nipy_spectral')
+        plt.savefig(name, bbox_inches='tight', pad_inches=0)
 
-        return render_template('output.html', imgpath=name)
+        # return render_template('output.html', imgpath=name)
+        return render_template("toyexample.html", imgpath=name)
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
+
+@app.route("/polycrystalline", methods=['GET', 'POST'])
+def polycrystalline():
+    if request.method == 'GET':
+        return render_template('index.html', value='hi')
+    if request.method == 'POST':
+        # print("HELLLOODFKOSDKFOSDKFOSKDOF")
+
+        x1 = float(request.form.get('x1', None))
+        y1 = float(request.form.get('y1', None))
+        r1 = float(request.form.get('r1', None))
+        x2 = float(request.form.get('x2', None))
+        y2 = float(request.form.get('y2', None))
+        # r2 = float(request.form.get('r2', None))
+
+        img = inference.generate_image(x1, y1, r1, x2, y2, 0)
+        vol_fraction = cal_vol_fraction(img)
+
+        fig = plt.figure(figsize=(12, 12))
+        columns = 4
+        rows = 4
+
+        for i in range(1, columns*rows+1):
+            image = img[i-1].squeeze(0).cpu().numpy()
+            fig.add_subplot(rows, columns, i)
+            plt.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9,
+                                wspace=0.05, hspace=0.05)
+            plt.imshow(image, cmap='jet', vmin=-0.5, vmax=4.5)
+            plt.axis('off')
+        # plt.savefig('./images/Darpa_Appendix.png', bbox_inches='tight', pad_inches=0)
+        savebuffer = uuid.uuid4()
+        name = './static/' + str(savebuffer) + '.png'
+        plt.savefig(name, bbox_inches='tight', pad_inches=0)
+        # plt.imsave(name, img, cmap='nipy_spectral')
+
+        # return render_template('output.html', imgpath=name)
+        return render_template("polycrystalline.html", name=str(vol_fraction), imgpath=name)
 
 # @app.route('/upload', methods=['POST'])
 # def upload():
