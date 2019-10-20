@@ -115,8 +115,8 @@ def toyexample():
                              3.1415 * r2 * r2 / 128 / 128)
 
         fig = plt.figure(figsize=(12, 12))
-        columns = 4
-        rows = 4
+        columns = 1
+        rows = 1
 
         for i in range(1, columns*rows+1):
             image = img[i-1].squeeze(0).cpu().numpy()
@@ -126,11 +126,11 @@ def toyexample():
             plt.imshow(image, cmap='binary')
             plt.axis('off')
 
-
+        #print(img.shape)
         savebuffer = uuid.uuid4()
         name = './static/' + str(savebuffer) + '.png'
+        #plt.imsave(name, img, cmap='nipy_spectral')
         plt.savefig(name, bbox_inches='tight', pad_inches=0)
-
         # return render_template('output.html', imgpath=name)
         return render_template("toyexample.html", imgpath=name)
 
@@ -153,21 +153,20 @@ def polycrystalline():
         vol_fraction = cal_vol_fraction(img)
 
         fig = plt.figure(figsize=(12, 12))
-        columns = 4
-        rows = 4
+        columns = 1
+        rows = 1
 
         for i in range(1, columns*rows+1):
-            image = img[i-1].squeeze(0).cpu().numpy()
-            fig.add_subplot(rows, columns, i)
-            plt.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9,
-                                wspace=0.05, hspace=0.05)
-            plt.imshow(image, cmap='jet', vmin=-0.5, vmax=4.5)
-            plt.axis('off')
-        # plt.savefig('./images/Darpa_Appendix.png', bbox_inches='tight', pad_inches=0)
+           image = img[i-1].squeeze(0).cpu().numpy()
+           fig.add_subplot(rows, columns, i)
+           plt.subplots_adjust(left=0.1, right=0.9, bottom=0.1, top=0.9,
+                               wspace=0.05, hspace=0.05)
+           plt.imshow(image, cmap='jet', vmin=-0.5, vmax=4.5)
+           plt.axis('off')
+        #plt.savefig('./images/Darpa_Appendix.png', bbox_inches='tight', pad_inches=0)
         savebuffer = uuid.uuid4()
         name = './static/' + str(savebuffer) + '.png'
         plt.savefig(name, bbox_inches='tight', pad_inches=0)
-        # plt.imsave(name, img, cmap='nipy_spectral')
 
         # return render_template('output.html', imgpath=name)
         return render_template("polycrystalline.html", name=str(vol_fraction), imgpath=name)

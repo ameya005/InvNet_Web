@@ -6,7 +6,7 @@ from PIL import Image
 from models import wgan_poly
 # from google.cloud import storage
 
-BATCH_SIZE = 16
+BATCH_SIZE = 1
 DIM = 128
 CATEGORY = 6
 OUTPUT_DIM = DIM*DIM*CATEGORY

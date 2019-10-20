@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 from models import wgan_poly
 from torch.utils.data import Dataset
 
-BATCH_SIZE = 16
+BATCH_SIZE = 1
 DIM = 128
 CHANNEL = 6
 
