@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href='/static/style.css' />
+    <!---<link rel="stylesheet" href='/static/style.css' /> -->
     <meta charset="utf-8">
+    {% include "header.html" %}
     <title>InvNet Emulator</title>
   </head>
   <body>
     {% extends "template.html" %}
     {% block content %}
-
-        <h2>InvNet: Encoding Geometric and Statistical Invariances in Deep Generative Models
-        <h5>Abstract:
+        <div class="container">
+        <div class="col-lg-12" text-center>
+        <h2>InvNet: Encoding Geometric and Statistical Invariances in Deep Generative Models</h2>
+        </div>
+        <div class="col-lg-12" text-center>
         Generative Adversarial Networks (GANs), while widely successful in modeling complex data distributions, have not yet been sufficiently leveraged in scientific computing and design. Reasons for this include the lack of flexibility of GANs to represent discrete-valued image data, as well as the lack of control over physical properties of generated samples. We propose a new conditional generative modeling approach (InvNet) that efficiently enables modeling discrete-valued images, while allowing control over their parameterized geometric and statistical properties. We evaluate our approach on several synthetic and real world problems: navigating manifolds of geometric shapes with desired sizes; generation of binary two-phase materials; and the (challenging) problem of generating multi-orientation polycrystalline microstructures.
-        </h5>
+        </div>
 {#    <h4>Toy example generating the circles on the designated positions and sizes</h4>#}
 {#    <h4>Generating polycrystalline with five orientations with designated volume fractions.</h4>#}
 

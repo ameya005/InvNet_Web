@@ -7,25 +7,50 @@
 <body>
     {% extends "template.html" %}
     {% block content %}
+    <div class="container">
+    <div class="col-lg-12" text-center>
     <h2>Input for generating the circle.</h2>
         <h3>The unit of input value is pixel. (Integer)</h3>
         <h5>Example Configuration: 36, 36, 12, 90, 90, 30.
         This will create one circle on left top with radius 12 and a circle on right bottom with radius 30.</h5>
     <form method="post" enctype="multipart/form-data">
-        <h5>circle1 x-coordinate (Any value from 36 to 96)</h5>
-        <input type="number" name="x1" step="0.01">
-        <h5>circle1 y-coordinate (Any value from 36 to 96)</h5>
-        <input type="number" name="y1" step="0.01">
-        <h5>circle1 radius (Any value from 12 to 34)</h5>
-        <input type="number" name="r1" step="0.01">
-        <h5>circle2 x-coordinate (Any value from 36 to 96)</h5>
-        <input type="number" name="x2" step="0.01">
-        <h5>circle2 y-coordinate (Any value from 36 to 96)</h5>
-        <input type="number" name="y2" step="0.01">
-        <h5>circle2 radius (Any value from 12 to 34)</h5>
-        <input type="number" name="r2" step="0.01">
-        <input type="submit" value="upload">
+        <div class="form-group row">
+        <label for="range`">1st Circle x-coordinate (Any value from 36 to 96)</label>
+        <input type="range" class="form-range" min="32" max="96" id="range" name="x1" step="1">
+        </div>
+
+        
+        <div class="form-group row">
+        <label for="exampleFormControlInput1">1st Circle y-coordinate (Any value from 36 to 96)</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="y1" step="1">
+        </div>
+
+        <div class="form-group row">
+        <label for="exampleFormControlInput1">1st Circle radius (Any value from 12 to 34)</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="r1" step="1">
+        </div>
+        
+        <div class="form-group row">
+        <label for="exampleFormControlInput1">2nd Circle x-coordinate (Any value from 36 to 96)</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="x2" step="1">
+        </div>
+
+        
+        <div class="form-group row">
+        <label for="exampleFormControlInput1">2nd Circle y-coordinate (Any value from 36 to 96)</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="y2" step="1">
+        </div>
+
+        <div class="form-group row">
+        <label for="exampleFormControlInput1">2nd Circle radius (Any value from 12 to 34)</label>
+        <input type="number" class="form-control" id="exampleFormControlInput1" name="r2" step="1">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <!---<input type="submit" value="upload">-->
     </form>
+    </div>
+    </div>
     {% endblock %}
 </body>
 </html>
