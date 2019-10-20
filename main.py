@@ -153,8 +153,8 @@ def polycrystalline():
         vol_fraction = cal_vol_fraction(img)
 
         fig = plt.figure(figsize=(12, 12))
-        columns = 1
-        rows = 1
+        columns = 2
+        rows = 2
 
         for i in range(1, columns*rows+1):
            image = img[i-1].squeeze(0).cpu().numpy()
