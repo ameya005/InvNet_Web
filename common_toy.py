@@ -3,7 +3,6 @@ import io
 import torch
 import torch.nn as nn
 from PIL import Image
-import torchvision.transforms as transforms
 from models import wgan_toy
 # from google.cloud import storage
 
