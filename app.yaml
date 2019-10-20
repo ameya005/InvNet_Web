@@ -1,14 +1,14 @@
-runtime: python
-env: flex
-entrypoint: gunicorn -b :$PORT main:app
-
-runtime_config:
-  python_version: 3
-
-skip_files:
-  - "backend/two_circles_generator.pt"
-
+runtime: python37
+entrypoint: gunicorn -b :8080 main:app
+instance_class: F4
 #[START gae_flex_storage_yaml]
-env_variables:
-    CLOUD_STORAGE_BUCKET: twocircle_generator
+#env_variables:
+#    CLOUD_STORAGE_BUCKET: twocircle_generator
 #[END gae_flex_storage_yaml]
+handlers:
+
+- url: /static'
+  static_dir: static
+
+- url: /.*
+  script: auto
