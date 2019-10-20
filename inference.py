@@ -22,7 +22,7 @@ def generate_image(x1, y1, r1, x2, y2, r2):
     gen_images = torch.argmax(gen_images.view(BATCH_SIZE, CHANNEL, DIM, DIM), dim=1).unsqueeze(1)
     gen_images = gen_images.int()
 
-
+    del aG
     # gen_images = aG(gen_rand_noise(), lv).view(BATCH_SIZE, CHANNEL, DIM, DIM)
     # image = gen_images.detach().numpy()
     # image = np.argmax(image, axis=1)

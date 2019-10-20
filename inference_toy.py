@@ -33,4 +33,5 @@ def generate_image(x1, y1, r1, x2, y2, r2):
     gen_images[np.where(gen_images == 0)] = 1
     gen_images = gen_images.int()
 
+    del aG #TODO: Fix. Models must just load once. Maybe we can deploy the models as separate services.
     return gen_images
