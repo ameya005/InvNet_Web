@@ -5,21 +5,25 @@
     <title>InvNet Simulator</title>
 </head>
 <body>
-    <h2>Input for generating the circle.</h2>
+    {% extends "template.html" %}
+    {% block content %}
+    <h2>Input for generating the polycrystalline.</h2>
+        <h4>Enter the volume fraction of each orientations: </h4>
+        <h5>Example Configuration: 1, 1, 1, 1, 1.
+        Generated polycrystalline will have even volume fractions on each orientations.</h5>
     <form method="post" enctype="multipart/form-data">
-        <h5>circle1 x-coordinate</h5>
+        <h5>Orientation 1</h5>
         <input type="number" name="x1" step="0.01">
-        <h5>circle1 y-coordinate</h5>
+        <h5>Orientation 2</h5>
         <input type="number" name="y1" step="0.01">
-        <h5>circle1 radius</h5>
+        <h5>Orientation 3</h5>
         <input type="number" name="r1" step="0.01">
-        <h5>circle2 x-coordinate</h5>
+        <h5>Orientation 4</h5>
         <input type="number" name="x2" step="0.01">
-        <h5>circle2 y-coordinate</h5>
+        <h5>Orientation 5</h5>
         <input type="number" name="y2" step="0.01">
-        <h5>circle2 radius</h5>
-        <input type="number" name="r2" step="0.01">
         <input type="submit" value="upload">
     </form>
+    {% endblock %}
 </body>
 </html>
