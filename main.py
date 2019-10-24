@@ -19,7 +19,7 @@ import io
 import time
 import uuid
 from PIL import Image
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, after_this_request
 import inference
 import inference_toy
 from tempfile import NamedTemporaryFile
@@ -100,7 +100,12 @@ def polycrystalline():
         savebuffer = uuid.uuid4()
         name = './static/' + str(savebuffer) + '.png'
         plt.savefig(name, bbox_inches='tight', pad_inches=0)
-
+        f = open(name, 'r')
+        # @after_this_request
+        # def cleanup(response):
+        #     os.remove(name)
+        #     #f.close()
+        #     return response
         # return render_template('output.html', imgpath=name)
         return render_template("polycrystalline.html", name=str(vol_fraction), imgpath=name)
 
