@@ -7,23 +7,48 @@
 <body>
     {% extends "template.html" %}
     {% block content %}
-    <h2>Input for generating the polycrystalline.</h2>
-        <h4>Enter the volume fraction of each orientations: </h4>
+    <div class="container">
+    <div class="col-lg-12" text-center>
+        <h2>Input for generating the polycrystalline.</h2>
+        <h5>Enter the volume fraction of each orientations: </h5>
         <h5>Example Configuration: 1, 1, 1, 1, 1.
         Generated polycrystalline will have even volume fractions on each orientations.</h5>
     <form method="post" enctype="multipart/form-data">
-        <h5>Orientation 1</h5>
-        <input type="number" name="x1" step="0.01">
-        <h5>Orientation 2</h5>
-        <input type="number" name="y1" step="0.01">
-        <h5>Orientation 3</h5>
-        <input type="number" name="r1" step="0.01">
-        <h5>Orientation 4</h5>
-        <input type="number" name="x2" step="0.01">
-        <h5>Orientation 5</h5>
-        <input type="number" name="y2" step="0.01">
-        <input type="submit" value="upload">
+        <div class="form-group row">
+            <label for="form1">Orientation 1</label>
+            <input type="number" class="form-control" name="x1" step="0.01">
+        </div>
+
+{#        <h5>Orientation 1</h5>#}
+{#        <input type="number" name="x1" step="0.01">#}
+{#        <h5>Orientation 2</h5>#}
+{#        <input type="number" name="y1" step="0.01">#}
+{#        <h5>Orientation 3</h5>#}
+{#        <input type="number" name="r1" step="0.01">#}
+{#        <h5>Orientation 4</h5>#}
+{#        <input type="number" name="x2" step="0.01">#}
+{#        <h5>Orientation 5</h5>#}
+{#        <input type="number" name="y2" step="0.01">#}
+        <div class="form-group row">
+            <label for="form1">Orientation 2</label>
+            <input type="number" class="form-control" name="y1" step="0.01"></div>
+
+        <div class="form-group row">
+            <label for="form1">Orientation 3</label>
+            <input type="number" class="form-control" name="r1" step="0.01"></div>
+
+        <div class="form-group row">
+            <label for="form1">Orientation 4</label>
+            <input type="number" class="form-control" name="21" step="0.01"></div>
+
+        <div class="form-group row">
+            <label for="form1">Orientation 5</label>
+            <input type="number" class="form-control" name="y1" step="0.01"></div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+{#        <input type="submit" value="upload">#}
     </form>
+    </div>
+    </div>
     {% endblock %}
 </body>
 </html>
