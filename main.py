@@ -76,11 +76,11 @@ def polycrystalline():
         return render_template('index.html', value='hi')
     if request.method == 'POST':
 
-        x1 = float(request.form.get('x1', None))
-        y1 = float(request.form.get('y1', None))
-        r1 = float(request.form.get('r1', None))
-        x2 = float(request.form.get('x2', None))
-        y2 = float(request.form.get('y2', None))
+        x1 = float(request.form.get('p1', 1))
+        y1 = float(request.form.get('p2', 1))
+        r1 = float(request.form.get('p3', 1))
+        x2 = float(request.form.get('p4', 1))
+        y2 = float(request.form.get('p5', 1))
 
         img = inference.generate_image(x1, y1, r1, x2, y2, 0)
         vol_fraction = cal_vol_fraction(img)
@@ -119,4 +119,4 @@ def server_error(e):
 if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
     # application on Google App Engine. See entrypoint in app.yaml.
-    app.run(host='127.0.0.1', port=8080, debug=True, threaded=False)
+    app.run(host='127.0.0.1', port=8080, debug=False, threaded=False)
